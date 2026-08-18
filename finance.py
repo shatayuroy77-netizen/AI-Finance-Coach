@@ -963,16 +963,16 @@ elif page == "Financial Health":
             )
 
         # =========================================================
-# 7. AI HEALTH REPORT
-# =========================================================
+        # 7. AI HEALTH REPORT
+        # =========================================================
 
-if st.button("🔍 Generate Health Report"):
+        if st.button("🔍 Generate Health Report"):
 
-    if not client:
-        st.error("API Key not found.")
+            if not client:
+                st.error("API Key not found.")
 
-    else:
-        prompt = f"""
+            else:
+                prompt = f"""
 Act as a practical, concise, and supportive AI Financial Coach.
 
 Analyze the user's financial health using ONLY the financial numbers
@@ -1129,19 +1129,19 @@ Do not restate the same financial problem in every section.
 Keep the complete report concise enough to read comfortably in under one minute.
 """
 
-        with st.spinner("Analyzing financial health..."):
+                with st.spinner("Analyzing financial health..."):
 
-            try:
-                response = client.models.generate_content(
-                    model="gemini-3.5-flash",
-                    contents=prompt
-                )
+                    try:
+                        response = client.models.generate_content(
+                            model="gemini-3.5-flash",
+                            contents=prompt
+                        )
 
-                data["last_health_report"] = response.text
-                save_data(data)
+                        data["last_health_report"] = response.text
+                        save_data(data)
 
-            except Exception as e:
-                st.error(f"Error: {e}")
+                    except Exception as e:
+                        st.error(f"Error: {e}")
 
         # =========================================================
         # 8. PERSISTENT HEALTH REPORT
@@ -1155,29 +1155,29 @@ Keep the complete report concise enough to read comfortably in under one minute.
                 data["last_health_report"]
             )
 
-    # =============================================================
-    # NAVIGATION
-    # =============================================================
+        # =========================================================
+        # NAVIGATION
+        # =========================================================
 
-    st.markdown("---")
+        st.markdown("---")
 
-    col_spacer, col1, col2 = st.columns(
-        [0.7, 1.4, 1.3]
-    )
+        col_spacer, col1, col2 = st.columns(
+            [0.7, 1.4, 1.3]
+        )
 
-    with col1:
+        with col1:
 
-        if st.button("⬅️ Back: Purchase Coach"):
+            if st.button("⬅️ Back: Purchase Coach"):
 
-            st.session_state.page = "Purchase Coach"
-            st.rerun()
+                st.session_state.page = "Purchase Coach"
+                st.rerun()
 
-    with col2:
+        with col2:
 
-        if st.button("Next: Goal Planner ➡️"):
+            if st.button("Next: Goal Planner ➡️"):
 
-            st.session_state.page = "Goal Planner"
-            st.rerun()
+                st.session_state.page = "Goal Planner"
+                st.rerun()
 
 # ----------------- 5. GOAL PLANNER PAGE -----------------
 elif page == "Goal Planner":
@@ -1915,17 +1915,12 @@ elif page == "Goal Planner":
         if st.button("🚀 Generate Detailed Goal Action Plan"):
 
             if not client:
-
                 st.error("API Key not found.")
 
             elif target_amount <= 0:
-
-                st.warning(
-                    "Please enter a valid target amount."
-                )
+                st.warning("Please enter a valid target amount.")
 
             else:
-
                 prompt = f"""
 Act as a practical, personalized financial planning assistant.
 
@@ -1985,10 +1980,10 @@ IMPORTANT DECISION RULES:
    and future monthly surplus rather than unnecessarily reducing
    financial reserves.
 
-6. For a major or high-value goal, do not automatically reject the
-   use of existing savings. Consider whether using some savings could
-   be reasonable while still maintaining an appropriate financial
-   safety buffer.
+6. For a major or high-value goal, do not automatically reject
+   the use of existing savings. Consider whether using some savings
+   could be reasonable while still maintaining an appropriate
+   financial safety buffer.
 
 7. If the user's monthly cash flow is negative, identify this as a
    major constraint and prioritize restoring positive cash flow.
@@ -2059,12 +2054,8 @@ Keep the final response useful enough to help the user make a decision,
 but short enough that it does not feel like a long financial report.
 """
 
-                with st.spinner(
-                    "Building your personalized goal plan..."
-                ):
-
+                with st.spinner("Building your personalized goal plan..."):
                     try:
-
                         response = client.models.generate_content(
                             model="gemini-3.5-flash",
                             contents=prompt
@@ -2078,10 +2069,7 @@ but short enough that it does not feel like a long financial report.
                         save_data(data)
 
                     except Exception as e:
-
-                        st.error(
-                            f"Error: {e}"
-                        )
+                        st.error(f"Error: {e}")
 
         # =========================================================
         # 11. PERSISTENT GOAL PLAN
@@ -2093,29 +2081,30 @@ but short enough that it does not feel like a long financial report.
                 data["last_goal_plan"]
             )
 
-    # =============================================================
-    # NAVIGATION
-    # =============================================================
+        # =========================================================
+        # NAVIGATION
+        # =========================================================
 
-    st.markdown("---")
+        st.markdown("---")
 
-    col_spacer, col1, col2 = st.columns(
-        [0.7, 1.4, 1.2]
-    )
+        col_spacer, col1, col2 = st.columns(
+            [0.7, 1.4, 1.2]
+        )
 
-    with col1:
+        with col1:
 
-        if st.button("⬅️ Back: Financial Health"):
+            if st.button("⬅️ Back: Financial Health"):
 
-            st.session_state.page = "Financial Health"
-            st.rerun()
+                st.session_state.page = "Financial Health"
+                st.rerun()
 
-    with col2:
+        with col2:
 
-        if st.button("Next: Money Lens ➡️"):
+            if st.button("Next: Money Lens ➡️"):
 
-            st.session_state.page = "Money Lens"
-            st.rerun()
+                st.session_state.page = "Money Lens"
+                st.rerun()
+
 
 # ----------------- 6. MONEY LENS PAGE -----------------
 elif page == "Money Lens":
@@ -2400,6 +2389,7 @@ and easy to read.
 
             st.session_state.page = "Help & Guide"
             st.rerun()
+
 
 # ----------------- 7. HELP & GUIDE PAGE (STATIC) -----------------
 elif page == "Help & Guide":
